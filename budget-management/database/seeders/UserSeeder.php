@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'prenom' => 'Système',
             'email' => 'admin@budget.com',
             'role' => 'admin',
-            'mot_de_passe' => Hash::make('admin123'),
+            'mot_de_passe' => Hash::make('  '),
             'date_creation' => now(),
         ]);
         
