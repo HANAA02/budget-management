@@ -20,8 +20,14 @@ use App\Http\Controllers\Admin\UserController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Routes d'authentification
-Auth::routes(['verify' => true]);
+// Auth::routes(['verify' => true]);
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
 
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');
 // Routes pour utilisateurs authentifiés
 Route::middleware(['auth', 'verified'])->group(function () {
     // Tableau de bord utilisateur
@@ -78,4 +84,14 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     // Paramètres système
     Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('settings', [SettingController::class, 'update'])->name('settings.update');
+});
+
+
+
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
+    Route::resource('categories', 'Admin\CategoryController');
+    Route::resource('users', 'Admin\UserController');
+    Route::get('users/{user}/activities', 'Admin\UserController@activities')->name('users.activities');
+    Route::get('password/reset/{user}', 'Admin\UserController@passwordReset')->name('password.reset');
 });
