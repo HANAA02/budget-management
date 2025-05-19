@@ -25,7 +25,9 @@ class DashboardController extends Controller
     }
 
     /**
-     * Affiche le tableau de bord de l'utilisateur.
+     * Display the user dashboard.
+     *
+     * @return \Illuminate\View\View
      */
     public function index()
     {

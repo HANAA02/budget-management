@@ -25,7 +25,9 @@ class ReportController extends Controller
     }
 
     /**
-     * Affiche la page des rapports.
+     * Display the reports page.
+     *
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -33,7 +35,9 @@ class ReportController extends Controller
     }
 
     /**
-     * Affiche le formulaire de génération de rapport.
+     * Show the form for generating a report.
+     *
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -45,7 +49,10 @@ class ReportController extends Controller
     }
 
     /**
-     * Génère un rapport personnalisé.
+     * Generate a custom report.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function generate(Request $request)
     {
@@ -88,7 +95,10 @@ class ReportController extends Controller
     }
 
     /**
-     * Affiche un rapport spécifique.
+     * Display a specific report.
+     *
+     * @param  int  $reportId
+     * @return \Illuminate\View\View
      */
     public function show($reportId)
     {
@@ -99,7 +109,11 @@ class ReportController extends Controller
     }
 
     /**
-     * Télécharge un rapport dans le format spécifié.
+     * Download a report in the specified format.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $reportId
+     * @return \Illuminate\Http\Response
      */
     public function download(Request $request, $reportId)
     {

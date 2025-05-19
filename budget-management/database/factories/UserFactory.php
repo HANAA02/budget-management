@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class UserFactory extends Factory
-{use HasFactory;
+{
     /**
      * The name of the factory's corresponding model.
      *

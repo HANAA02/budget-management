@@ -28,7 +28,9 @@ class BudgetController extends Controller
     }
 
     /**
-     * Affiche la liste des budgets de l'utilisateur.
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -37,7 +39,9 @@ class BudgetController extends Controller
     }
 
     /**
-     * Affiche le formulaire de création d'un budget.
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -49,7 +53,10 @@ class BudgetController extends Controller
     }
 
     /**
-     * Enregistre un nouveau budget.
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\User\BudgetRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(BudgetRequest $request)
     {
@@ -70,7 +77,10 @@ class BudgetController extends Controller
     }
 
     /**
-     * Affiche les détails d'un budget.
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Budget  $budget
+     * @return \Illuminate\View\View
      */
     public function show(Budget $budget)
     {
@@ -95,7 +105,10 @@ class BudgetController extends Controller
     }
 
     /**
-     * Affiche le formulaire de modification d'un budget.
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Budget  $budget
+     * @return \Illuminate\View\View
      */
     public function edit(Budget $budget)
     {
@@ -105,7 +118,11 @@ class BudgetController extends Controller
     }
 
     /**
-     * Met à jour un budget.
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\User\BudgetRequest  $request
+     * @param  \App\Models\Budget  $budget
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(BudgetRequest $request, Budget $budget)
     {
@@ -118,7 +135,10 @@ class BudgetController extends Controller
     }
 
     /**
-     * Supprime un budget.
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Budget  $budget
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Budget $budget)
     {
@@ -131,7 +151,10 @@ class BudgetController extends Controller
     }
 
     /**
-     * Affiche la page de répartition du budget.
+     * Show the budget allocation page.
+     *
+     * @param  \App\Models\Budget  $budget
+     * @return \Illuminate\View\View
      */
     public function showAllocation(Budget $budget)
     {
@@ -144,7 +167,11 @@ class BudgetController extends Controller
     }
 
     /**
-     * Enregistre la répartition du budget.
+     * Save the budget allocation.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Budget  $budget
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function saveAllocation(Request $request, Budget $budget)
     {
