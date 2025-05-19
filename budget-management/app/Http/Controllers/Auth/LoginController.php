@@ -84,28 +84,55 @@ class LoginController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function login(LoginRequest $request)
-    {
-        // Tentative de connexion
-        if (Auth::attempt([
-            'email' => $request->email,
-            'password' => $request->password,
-        ], $request->filled('remember'))) {
+    // public function login(LoginRequest $request)
+    // {
+    //     // Tentative de connexion
+    //     if (Auth::attempt([
+    //         'email' => $request->email,
+    //         'password' => $request->password,
+    //     ], $request->filled('remember'))) {
             
-            $request->session()->regenerate();
+    //         $request->session()->regenerate();
             
-            $user = Auth::user();
-            $user->update(['dernier_login' => now()]);
+    //         $user = Auth::user();
+    //         $user->update(['dernier_login' => now()]);
             
-            if ($user->role === 'admin') {
-                return redirect()->route('admin.dashboard');
-            }
+    //         if ($user->role === 'admin') {
+    //             return redirect()->route('admin.dashboard');
+    //         }
             
-            return redirect()->route('user.dashboard');
-        }
+    //         return redirect()->route('user.dashboard');
+    //     }
         
-        return back()->withErrors([
-            'email' => 'Les informations de connexion ne correspondent pas à nos enregistrements.',
-        ])->withInput($request->only('email', 'remember'));
+    //     return back()->withErrors([
+    //         'email' => 'Les informations de connexion ne correspondent pas à nos enregistrements.',
+    //     ])->withInput($request->only('email', 'remember'));
+    // }
+
+    public function showLoginForm()
+{
+    return view('auth.login');
+}
+
+public function login(LoginRequest $request)
+{
+    if (Auth::attempt($request->only('email', 'password'))) {
+        $request->session()->regenerate();
+        return redirect()->intended('/dashboard');
     }
+
+    return back()->withErrors([
+        'email' => 'Les identifiants sont incorrects.',
+    ]);
+}
+
+public function logout(Request $request)
+{
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return redirect('/login');
+}
+
 }
