@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CategoryBudget extends Model
-{
+{use HasFactory;
+
     protected $table = 'categorie_budget';
     
     protected $fillable = [

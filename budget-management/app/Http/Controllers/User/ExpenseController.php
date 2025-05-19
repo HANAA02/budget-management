@@ -20,7 +20,10 @@ class ExpenseController extends Controller
     }
 
     /**
-     * Affiche la liste des dépenses.
+     * Display a listing of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\View\View
      */
     public function index(Request $request)
     {
@@ -61,7 +64,9 @@ class ExpenseController extends Controller
     }
 
     /**
-     * Affiche le formulaire de création d'une dépense.
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -74,7 +79,10 @@ class ExpenseController extends Controller
     }
 
     /**
-     * Enregistre une nouvelle dépense.
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\User\ExpenseRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ExpenseRequest $request)
     {
@@ -99,7 +107,10 @@ class ExpenseController extends Controller
     }
 
     /**
-     * Affiche les détails d'une dépense.
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Expense  $expense
+     * @return \Illuminate\View\View
      */
     public function show(Expense $expense)
     {
@@ -109,7 +120,10 @@ class ExpenseController extends Controller
     }
 
     /**
-     * Affiche le formulaire de modification d'une dépense.
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Expense  $expense
+     * @return \Illuminate\View\View
      */
     public function edit(Expense $expense)
     {
@@ -121,7 +135,11 @@ class ExpenseController extends Controller
     }
 
     /**
-     * Met à jour une dépense.
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\User\ExpenseRequest  $request
+     * @param  \App\Models\Expense  $expense
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(ExpenseRequest $request, Expense $expense)
     {
@@ -140,7 +158,10 @@ class ExpenseController extends Controller
     }
 
     /**
-     * Supprime une dépense.
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Expense  $expense
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Expense $expense)
     {
@@ -153,7 +174,10 @@ class ExpenseController extends Controller
     }
 
     /**
-     * Ajoute rapidement une dépense.
+     * Quickly add an expense.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function quickAdd(Request $request)
     {
