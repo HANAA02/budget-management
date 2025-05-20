@@ -42,4 +42,31 @@ class User extends Authenticatable
     {
         return $this->role === 'admin';
     }
+    /**
+ * The column name of the "password" field.
+ *
+ * @var string
+ */
+protected $passwordName = 'mot_de_passe';
+
+/**
+ * Get the password for the user.
+ *
+ * @return string
+ */
+public function getAuthPassword()
+{
+    return $this->mot_de_passe;
+}
+
+/**
+ * Set the user's password.
+ *
+ * @param  string  $value
+ * @return void
+ */
+public function setPasswordAttribute($value)
+{
+    $this->attributes['mot_de_passe'] = $value;
+}
 }

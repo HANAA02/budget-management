@@ -61,20 +61,21 @@ class LoginController extends Controller
      * @param  mixed  $user
      * @return mixed
      */
-    protected function authenticated(Request $request, $user)
-    {
-        // Mettre à jour la date de dernière connexion
-        $user->update([
-            'dernier_login' => now(),
-        ]);
-        
-        // Rediriger l'utilisateur en fonction de son rôle
-        if ($user->role === 'admin') {
-            return redirect()->route('admin.dashboard');
-        }
-        
-        return redirect()->route('user.dashboard');
+// Dans app/Http/Controllers/Auth/LoginController.php
+protected function authenticated(Request $request, $user)
+{
+    // Mettre à jour la date de dernière connexion
+    $user->update([
+        'dernier_login' => now(),
+    ]);
+    
+    // Rediriger l'utilisateur en fonction de son rôle
+    if ($user->role === 'admin') {
+        return redirect()->route('admin.dashboard');
     }
+    
+    return redirect()->route('user.dashboard');
+}
     
     /**
      * Handle a login request to the application.
@@ -116,9 +117,20 @@ class LoginController extends Controller
 
 public function login(LoginRequest $request)
 {
-    if (Auth::attempt($request->only('email', 'password'))) {
+    // Déterminer si l'option "se souvenir de moi" est cochée
+    $remember = $request->boolean('remember', false);
+    
+    if (Auth::attempt($request->only('email', 'password'), $remember)) {
         $request->session()->regenerate();
-        return redirect()->intended('/dashboard');
+        
+        $user = Auth::user();
+        $user->update(['dernier_login' => now()]);
+        
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
+        
+        return redirect()->route('user.dashboard');
     }
 
     return back()->withErrors([

@@ -114,10 +114,10 @@ Route::middleware(['auth', 'verified'])->prefix('user')->name('user.')->group(fu
 });
 
 // Admin routes
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     // Dashboard
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-    
+     
     // Users management
     Route::resource('users', UserController::class);
     Route::put('users/{user}/role', [UserController::class, 'updateRole'])->name('users.update-role');
