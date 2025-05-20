@@ -24,7 +24,7 @@ class LoginRequest extends FormRequest
         return [
             'email' => 'required|string|email',
             'password' => 'required|string',
-            'remember' => 'boolean',
+            'remember' => 'sometimes|nullable', // Modifié ici
         ];
     }
     
@@ -39,5 +39,23 @@ class LoginRequest extends FormRequest
             'email' => 'adresse e-mail',
             'password' => 'mot de passe',
         ];
+    }
+    
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        // Si remember est présent, on le convertit explicitement en booléen
+        if ($this->has('remember')) {
+            $this->merge([
+                'remember' => filter_var($this->remember, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) ?? false,
+            ]);
+        } else {
+            // Si remember n'est pas présent, on le définit à false
+            $this->merge(['remember' => false]);
+        }
     }
 }
