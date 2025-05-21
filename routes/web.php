@@ -18,3 +18,7 @@ Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->middleware('auth')->name('admin.dashboard');
 Route::middleware('auth')->get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
+Route::middleware('auth')->group(function () {
+    Route::get('/transactions/create', [TransactionController::class, 'create'])->name('transactions.create');
+    Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
+});
